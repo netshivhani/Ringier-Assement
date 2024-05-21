@@ -1,0 +1,10 @@
+I chose flask.
+follow the below to run the on the terminal of your choice
+
+Run the Flask app: python app.py.
+
+
+Access the endpoints:
+GET /api/server-info to get the server's average load and available disk space.
+GET /api/return-value to get the current return_value.
+POST /api/return-value with a JSON payload {"return_value": "new_value"} to update the return_value.
