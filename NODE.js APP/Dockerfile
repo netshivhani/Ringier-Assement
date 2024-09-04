@@ -1,23 +1,15 @@
-# Here I used the official Node.js image from the Docker Hub
-# different option to use
-#@ my work place we are using base image and images store with aws codebuild ECR
-# and some of my application are using apache images stored in Jfrog repository
+FROM node:12.2
 
-FROM node:14
+ENV HOME=/home/app
 
-# cd to direct
-WORKDIR /usr/src/app
+RUN apt-get update && apt-get install htop
 
-# Copy application files to the container
-COPY server.js .
+COPY package.json package-lock.json $HOME/node_docker/
 
-# Expose the port the app runs on
-EXPOSE 8080
+WORKDIR $HOME/node_docker
 
-# Define environment variable
-ENV FOOBAR "Hello, Docker!"
+RUN npm install --silent --progress=false
 
-# Run the application
-CMD ["node", "server.js"]
+COPY . $HOME/node_docker
 
-# I didnt do much testing due to time.
+CMD ["npm", "start"]
